@@ -11,6 +11,9 @@ import { hashSync } from 'bcrypt';
 // Import models
 import '@models/user.model';
 import User from '@models/user.model';
+import Post from '@models/post.model';
+import Alert from '@models/alert.model';
+import AlertPost from '@models/alertPost.model';
 
 const { port } = config;
 
@@ -21,9 +24,10 @@ const server: Server = httpServer.listen(port, (): void => {
   logger.info(`Listening on port ${port}`);
 
   // Init database
-  sequelize.sync({ alter: true }).then(async () => {
+  sequelize.sync({ force: true }).then(async () => {
     logger.info('Database connected');
 
+    // User 
     const userCount = await User.count();
     if (userCount === 0) {
       await User.create({
@@ -31,6 +35,43 @@ const server: Server = httpServer.listen(port, (): void => {
         password: hashSync('admin', 10),
       });
     }
+
+    // Alert
+    const alertCount = await Alert.count();
+    if (alertCount === 0) {
+      await Alert.create({
+        title: 'pollution des eaux aux rives de l orne.',
+        description: 'des passants balancent des dechets',
+        type: 'video',
+        category: 'pollution',
+        startTime: new Date(),
+        endTime: null,
+      });
+    }
+
+    // Post
+    const postCount = await Post.count();
+    if (postCount === 0) {
+      await Post.create({
+        title: 'pollution des eaux aux rives de l orne.',
+        description: 'des passants balancent des dechets',
+        content: 'video',
+        publishingTime: new Date(),
+        alertIds: null,
+      });
+    }
+
+    
+    const alertPostCount = await AlertPost.count();
+    if (alertPostCount === 0) {
+      const alert1 = await Alert.findOne();
+      const post1 = await Post.findOne();
+      await AlertPost.create({
+          postId: post1.id,
+          alertId: alert1.id,
+      });
+    }
+
   });
 });
 
