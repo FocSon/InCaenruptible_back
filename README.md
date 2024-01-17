@@ -9,6 +9,14 @@
     - type : video / photo / data(pollution,noise,...);
     - category : pollution / noise / deterioration;
 
+- Object Request:
+    - id : number;
+    - title : string;
+    - description : string;
+    - startTime :  timeStamp;
+    - type : video / photo / data(pollution,noise,...);
+    - category : pollution / noise / deterioration;
+
 
 - Object Post:
     - id : number;
@@ -124,3 +132,72 @@
 >    **Content**  
         - alertId : number ; id of the alert done.  
         - message : string ; message to display to the user.
+
+### Admin
+
+#### API REST
+
+**POST** --> `/api/login`
+>    **Inputs**   
+        - username : string ; username of the admin.  
+        - password : string ; password of the admin.
+
+>   **Output**
+        - token : string ; token to auth the admin.
+
+**POST** --> `/api/setMainAlert` (auth)
+>    **Inputs**   
+        - id : number ; id of the alert to set as main.  
+
+**POST** --> `/api/refuseAlert` (auth)
+>    **Inputs**   
+        - id : number ; id of the alert to refuse.
+
+**POST** --> `/api/acceptAlert` (auth)
+>    **Inputs**   
+        - id : number ; id of the alert to accept.
+        - title : string | undefined ; title of the alert.
+        - description : string | undefined ; description of the alert.
+        - category : string | undefined ; category of the alert.
+
+**POST** --> `/api/deleteAlert` (auth)
+>    **Inputs**   
+        - id : number ; id of the alert to delete.
+
+**POST** --> `/api/endAlert` (auth)
+>    **Inputs**   
+        - id : number ; id of the alert to end.
+        - message : string ; message to display to the user.
+
+**POST** --> `/api/updateAlert` (auth)
+>    **Inputs**   
+        - id : number ; id of the alert to update.
+        - title : string | undefined ; title of the alert.
+        - description : string | undefined ; description of the alert.
+        - category : string | undefined ; category of the alert.
+
+**POST** --> `/api/createPost` (auth)
+>    **Inputs**   
+        - title : string ; title of the post.
+        - description : string ; description of the post.
+        - content : string ; content of the post.
+        - alertIds : number[] ; ids of the alerts linked to the post.
+        - medias : I don't know yet ; medias to upload that are used in the post.
+
+**POST** --> `/api/deletePost` (auth)
+>    **Inputs**   
+        - id : number ; id of the post to delete.
+
+#### WebSocket
+
+`admin:init`   Server ---> Client (auth)
+>    **Content**  
+        - requests : Request[] ; list of requests not yet accepted or refused.
+
+`admin:newRequest`   Server ---> Client (auth)
+>    **Content**  
+        - request : Request ; new request not yet accepted or refused.
+
+`admin:requestDeleted`   Server ---> Client (auth)
+>    **Content**  
+        - requestId : number ; id of the request deleted.
