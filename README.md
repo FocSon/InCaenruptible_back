@@ -7,7 +7,8 @@
     - startTime :  timeStamp;
     - endTime : timeStamp | null;
     - type : video / photo / data(pollution,noise,...);
-    - category : pollution / noise / deteroriation;
+    - category : pollution / noise / deterioration;
+
 
 - Object Post:
     - id : number;
