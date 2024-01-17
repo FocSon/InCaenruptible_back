@@ -7,7 +7,7 @@ export type AppModule = {
   models: any[];
 }
 
-export type alertType = 'video' | 'photo' | 'data';
+export type alertType = 'video' | 'image' | 'data';
 export type alertCategory = 'pollution' | 'noise' | 'deterioration'
 
 export type AlertRequest = {

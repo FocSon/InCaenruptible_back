@@ -1,4 +1,4 @@
-import { getAlertRequest } from '@alerts';
+import { getAlert, getAlertRequest } from '@alerts';
 
 export function notifyEmitterAlertRefused(id) {
   const request = getAlertRequest(id);
@@ -12,11 +12,11 @@ export function notifyEmitterAlertRefused(id) {
 }
 
 export function notifyEmitterAlertAccepted(requestId: number, alertId: number, token: string) {
-  const request = getAlertRequest(requestId);
-  if (!request) return;
+  const alert = getAlert(alertId);
+  if (!alert) return;
 
-  if (request.socket) {
-    request.socket.emit('emitter:alertAccepted', {
+  if (alert.socket) {
+    alert.socket.emit('emitter:alertAccepted', {
       requestId,
       alertId,
       token,
