@@ -1,5 +1,5 @@
 import { Alert, AlertRequest } from './types';
-import { notifyAlertDone, notifyDeleteAlert } from '@sockets/client/client.actions';
+import { notifyAlertDone, notifyDeleteAlert, notifyNewAlert } from '@sockets/client/client.actions';
 import {
   notifyEmitterAlertAccepted,
   notifyEmitterAlertDone,
@@ -24,7 +24,7 @@ export function createAlert(alert: Omit<Alert, 'id'>) {
   const nAlter = { ...alert, id: alertID++ };
   activeAlerts.set(nAlter.id, nAlter);
 
-  // notifyNewAlert(nAlter);
+  notifyNewAlert(nAlter);
 
   return {
     id: nAlter.id,
@@ -37,7 +37,7 @@ export function getAlert(id: number) {
 }
 
 export function getAlerts() {
-  return activeAlerts.values();
+  return Array.from(activeAlerts.values());
 }
 
 export function getAlertMap() {
