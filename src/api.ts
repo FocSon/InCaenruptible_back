@@ -14,10 +14,13 @@ router.use(alertRouter);
 // Socket.io
 import client from '@sockets/client/client.register';
 import emitter from '@sockets/emitter/emitter.register';
+import { init } from '@sockets/client/client.actions';
 
 function register(io: SocketIO.Server, socket: SocketIO.Socket) {
   client(io, socket);
   emitter(io, socket);
+
+  init(socket);
 }
 
 export default {
