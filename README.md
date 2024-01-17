@@ -110,17 +110,17 @@
 >    **Content**  
         - token : string ; token to auth the emitter.
 
-`alertRefused`   Server ---> Client
+`emitter:alertRefused`   Server ---> Client
 >    **Content**  
         - requestId : number ; id of the request.  
 
-`alertAccepted`   Server ---> Client
+`emitter:alertAccepted`   Server ---> Client
 >    **Content**  
         - requestId : number ; id of the request.  
         - token : string ; token to auth the emitter.  
         - alertId : number ; id of the alert created.
 
-`alertDone`   Server ---> Client
+`emitter:alertDone`   Server ---> Client
 >    **Content**  
         - alertId : number ; id of the alert done.  
         - message : string ; message to display to the user.

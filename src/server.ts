@@ -4,6 +4,7 @@ import config from '@config/config';
 import logger from '@core/utils/logger';
 import errorHandler from '@core/utils/errorHandler';
 import sequelize from './models/db';
+import io from '@io'
 
 // Import models
 import '@models/user.model';
@@ -11,6 +12,8 @@ import User from '@models/user.model';
 import { hashSync } from 'bcrypt';
 
 const { port } = config;
+
+io.attachApp(app);
 
 const server: Server = app.listen(port, (): void => {
   logger.info(`Listening on port ${port}`);
