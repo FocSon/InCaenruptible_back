@@ -51,7 +51,7 @@
 `init`   Server ---> Client  
 >    **Content**  
         - alerts : Alert[] ; list of alerts currently active.   
-        - mainAlertId ; id of the main alert.   
+        - mainAlertId : number | null ; id of the main alert.   
  
 `newAlert`   Server ---> Client  
 >    **Content**  
@@ -83,21 +83,7 @@
 
 `stopWatchAlert`   Client ---> Server  
 >    **Content**  
-        - id : number ; alert not to watch anymore. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        - id : number ; alert not to watch anymore.
 
 ### Emitter
 
@@ -112,30 +98,23 @@
         - token : string | undefined ; token of the device if it has one.
 
 >   **Output**  
-        - requestId : number ; id of the request.  
+        - requestId : number ; id of the request.
         - token : string ; token to auth the emitter.
 
 #### WebSocket
 
-`streamData/:id`   Client ---> Server
->    **Inputs**   
-        - id : number; alert identifier. (if not accepted, use the requestId)
-
+`streamData`   Client ---> Server
 >    **Content**  
         - data : any ; data from the streamed alert.  
         - token : string ; token to auth the emitter.
 
-`stopStream/:id`   Client ---> Server
->    **Inputs**   
-        - id : number; alert identifier. (if not accepted, use the requestId)
-
+`stopStream`   Client ---> Server
 >    **Content**  
         - token : string ; token to auth the emitter.
 
 `alertRefused`   Server ---> Client
 >    **Content**  
         - requestId : number ; id of the request.  
-        - token : string ; token to auth the emitter.
 
 `alertAccepted`   Server ---> Client
 >    **Content**  
@@ -146,5 +125,4 @@
 `alertDone`   Server ---> Client
 >    **Content**  
         - alertId : number ; id of the alert done.  
-        - token : string ; 
         - message : string ; message to display to the user.
