@@ -75,9 +75,9 @@ function deleteAlert(id: number) {
 const alertRequests = new Map<number, AlertRequest>();
 let requestID = 0;
 
-export function createAlertRequest(request: Omit<AlertRequest, 'requestID'>) {
+export function createAlertRequest(request: Omit<AlertRequest, 'requestId'>) {
   const id = requestID++;
-  alertRequests.set(id, { ...request, requestID: id });
+  alertRequests.set(id, { ...request, requestId: id });
   return {
     id,
     token: genToken(id, true),
@@ -94,7 +94,7 @@ export function removeAlertRequest(id: number) {
 }
 
 export function getAlertRequests() {
-  return alertRequests.values();
+  return Array.from(alertRequests.values());
 }
 
 export function getAlertRequestMap() {

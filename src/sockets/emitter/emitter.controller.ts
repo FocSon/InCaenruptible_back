@@ -18,7 +18,7 @@ export default (socket: SocketIO.Socket) => ({
       if (!request) return;
       if (!request.socket) request.socket = socket;
       // TODO: Do admin streaming of request data
-      acceptAlert(request.requestID)
+      acceptAlert(request.requestId)
     } else {
       const alert = Alerts.getAlert(id);
       if (!alert) return;

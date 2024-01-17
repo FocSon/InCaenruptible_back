@@ -11,7 +11,7 @@ export type alertType = 'video' | 'image' | 'data';
 export type alertCategory = 'pollution' | 'noise' | 'deterioration'
 
 export type AlertRequest = {
-  requestID: number;
+  requestId: number;
   title: string;
   description: string;
   type: alertType;
