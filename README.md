@@ -69,11 +69,9 @@
 >    **Content**  
         - id : number ; alert that will become the main one. 
 
-`streamAlertData/:id`   Server ---> Client  
->    **Inputs**   
-        - id : number; alert identifier.
-         
+`streamAlertData`   Server ---> Client  
 >    **Content**  
+        - id : number; alert identifier.  
         - data : any ; data from the streamed alert. 
 
     
@@ -98,7 +96,7 @@
         - token : string | undefined ; token of the device if it has one.
 
 >   **Output**  
-        - requestId : number ; id of the request.
+        - requestId : number ; id of the request.  
         - token : string ; token to auth the emitter.
 
 #### WebSocket
