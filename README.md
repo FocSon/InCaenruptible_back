@@ -51,7 +51,7 @@
 `init`   Server ---> Client  
 >    **Content**  
         - alerts : Alert[] ; list of alerts currently active.   
-        - mainAlertId ; id of the main alert.   
+        - mainAlertId : number | null ; id of the main alert.   
  
 `newAlert`   Server ---> Client  
 >    **Content**  
@@ -69,11 +69,9 @@
 >    **Content**  
         - id : number ; alert that will become the main one. 
 
-`streamAlertData/:id`   Server ---> Client  
->    **Inputs**   
-        - id : number; alert identifier.
-         
+`streamAlertData`   Server ---> Client  
 >    **Content**  
+        - id : number; alert identifier.  
         - data : any ; data from the streamed alert. 
 
     
@@ -83,21 +81,7 @@
 
 `stopWatchAlert`   Client ---> Server  
 >    **Content**  
-        - id : number ; alert not to watch anymore. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        - id : number ; alert not to watch anymore.
 
 ### Emitter
 
@@ -117,34 +101,26 @@
 
 #### WebSocket
 
-`streamData/:id`   Client ---> Server
->    **Inputs**   
-        - id : number; alert identifier. (if not accepted, use the requestId)
-
+`streamData`   Client ---> Server
 >    **Content**  
         - data : any ; data from the streamed alert.  
         - token : string ; token to auth the emitter.
 
-`stopStream/:id`   Client ---> Server
->    **Inputs**   
-        - id : number; alert identifier. (if not accepted, use the requestId)
-
+`stopStream`   Client ---> Server
 >    **Content**  
         - token : string ; token to auth the emitter.
 
-`alertRefused`   Server ---> Client
+`emitter:alertRefused`   Server ---> Client
 >    **Content**  
         - requestId : number ; id of the request.  
-        - token : string ; token to auth the emitter.
 
-`alertAccepted`   Server ---> Client
+`emitter:alertAccepted`   Server ---> Client
 >    **Content**  
         - requestId : number ; id of the request.  
         - token : string ; token to auth the emitter.  
         - alertId : number ; id of the alert created.
 
-`alertDone`   Server ---> Client
+`emitter:alertDone`   Server ---> Client
 >    **Content**  
         - alertId : number ; id of the alert done.  
-        - token : string ; 
         - message : string ; message to display to the user.
