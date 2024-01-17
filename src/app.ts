@@ -21,7 +21,7 @@ app.use(httpLogger.successHandler);
 app.use(httpLogger.errorHandler);
 app.use(uniqueReqId);
 app.use(express.json());
-app.use(consts.API_ROOT_PATH, api);
+app.use(consts.API_ROOT_PATH, api.expressRouter);
 app.use(http404);
 
 app.use(errorHandling);

@@ -24,11 +24,14 @@
     "outDir": "./dist",
     "paths": {
       "@app": ["./app.ts"],
+      "@io": ["./sockets.ts"],
+      "@alerts": ["./alerts.ts"],
       "@core/*": ["core/*"],
       "@components/*": ["components/*"],
       "@config/*": ["config/*"],
       "@models/*": ["models/*"],
-      "@middleware/*": ["middleware/*"]
+      "@middleware/*": ["middleware/*"],
+      "@sockets/*": ["sockets/*"],
     },
     "plugins": [{ "transform": "ts-optchain/transform" }]
   },

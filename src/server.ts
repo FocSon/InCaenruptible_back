@@ -4,6 +4,9 @@ import config from '@config/config';
 import logger from '@core/utils/logger';
 import errorHandler from '@core/utils/errorHandler';
 import sequelize from './models/db';
+import http from 'http';
+import io from '@io';
+import { hashSync } from 'bcrypt';
 
 // Import models
 import '@models/user.model';
@@ -11,11 +14,13 @@ import User from '@models/user.model';
 import Post from '@models/post.model';
 import Alert from '@models/alert.model';
 import AlertPost from '@models/alertPost.model';
-import { hashSync } from 'bcrypt';
 
 const { port } = config;
 
-const server: Server = app.listen(port, (): void => {
+const httpServer = http.createServer(app);
+io.attach(httpServer);
+
+const server: Server = httpServer.listen(port, (): void => {
   logger.info(`Listening on port ${port}`);
 
   // Init database
