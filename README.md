@@ -10,7 +10,7 @@
     - category : pollution / noise / deterioration;
 
 - Object Request:
-    - id : number;
+    - requestId : number;
     - title : string;
     - description : string;
     - startTime :  timeStamp;
@@ -201,3 +201,16 @@
 `admin:requestDeleted`   Server ---> Client (auth)
 >    **Content**  
         - requestId : number ; id of the request deleted.
+
+`admin:watchRequest`   Client ---> Server (auth)
+>    **Content**  
+        - requestId : number ; id of the request to watch.
+
+`admin:stopWatchRequest`   Client ---> Server (auth)
+>    **Content**  
+        - requestId : number ; id of the request to stop watching.
+
+`admin:streamRequestData`   Server ---> Client (auth)
+>    **Content**  
+        - requestId : number ; id of the request to stream data from.
+        - data : any ; data from the streamed request.
