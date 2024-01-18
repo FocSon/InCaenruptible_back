@@ -32,7 +32,7 @@
 
 #### API REST
 
-**GET** --> `/api/alertDone`   
+**GET** --> `/api/alertsDone`   
 >    **Inputs**   
         - n : number (10);  number of alerts asked by the client.  
         - startId number | undefined; id of the last alert received and undefined if none.   

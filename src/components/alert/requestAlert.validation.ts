@@ -10,4 +10,13 @@ const requestAlertValidation: ValidationSchema = {
   }),
 };
 
-export default requestAlertValidation;
+const requestPostValidation: ValidationSchema = {
+  params: Joi.object().keys({
+    id: Joi.string().required()
+  }),
+};
+
+export {
+  requestAlertValidation,
+  requestPostValidation,
+};
