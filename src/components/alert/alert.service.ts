@@ -9,7 +9,6 @@ const alertsDone = async (n: number, startId: number | undefined) => {
         id: {
           [Op.lt]: startId,
         },
-        done: true,
       },
       order: [
         ['id', 'DESC'],
