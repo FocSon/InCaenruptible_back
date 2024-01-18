@@ -1,8 +1,8 @@
 import User from '@models/user.model';
-import {hashSync} from 'bcrypt';
+import { hashSync } from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import httpMocks from 'node-mocks-http';
-import {Request, Response} from 'express';
+import { Request, Response } from 'express';
 import isAuth from './auth.middleware';
 import AppError from '@core/utils/appError';
 import httpStatus from 'http-status';
@@ -15,7 +15,7 @@ describe('Auth middleware', () => {
   } as User);
 
   test('should call next middleware in the stack with no errors if token is valid', async () => {
-    const validToken = jwt.sign({id: 1}, process.env.JWT_SECRET as string);
+    const validToken = jwt.sign({ id: 1 }, process.env.JWT_SECRET as string);
     const next = jest.fn();
     const res: Response = httpMocks.createResponse();
     const req: Request = httpMocks.createRequest({
@@ -45,7 +45,7 @@ describe('Auth middleware', () => {
     await isAuth(req, res, next);
 
     expect(next).toHaveBeenCalledWith(
-      new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized', false)
+      new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized', false),
     );
   });
 
@@ -63,7 +63,7 @@ describe('Auth middleware', () => {
     await isAuth(req, res, next);
 
     expect(next).toHaveBeenCalledWith(
-      new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized', false)
+      new AppError(httpStatus.UNAUTHORIZED, 'Unauthorized', false),
     );
   });
 });

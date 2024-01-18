@@ -1,5 +1,5 @@
-import {ValidationSchema} from '@core/interfaces/validationSchema';
-import {NextFunction, Request, Response} from 'express';
+import { ValidationSchema } from '@core/interfaces/validationSchema';
+import { NextFunction, Request, Response } from 'express';
 import AppError from '@core/utils/appError';
 import httpStatus from 'http-status';
 import Joi from 'joi';
@@ -22,8 +22,8 @@ const validation =
       }
       const validSchema = pickObjectKeysWithValues(schema, filterOutNotValidSchemaKeys);
       const object = pickObjectKeysWithValues(req, Object.keys(validSchema));
-      const {value, error} = Joi.compile(validSchema)
-        .prefs({errors: {label: 'key'}})
+      const { value, error } = Joi.compile(validSchema)
+        .prefs({ errors: { label: 'key' } })
         .validate(object);
 
       if (error) {

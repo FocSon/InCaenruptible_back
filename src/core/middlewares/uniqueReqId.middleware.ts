@@ -1,5 +1,5 @@
-import {v4 as uuidv4} from 'uuid';
-import {Request, Response, NextFunction} from 'express';
+import { v4 as uuidv4 } from 'uuid';
+import { NextFunction, Request, Response } from 'express';
 import httpContext from 'express-http-context';
 import logger from '@core/utils/logger';
 

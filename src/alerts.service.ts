@@ -9,7 +9,7 @@ export async function createAlertDB(alert: Omit<Alert, 'id'>) {
     category: alert.category,
     startTime: alert.startTime,
     endTime: alert.endTime,
-  } as any)
+  } as any);
 }
 
 export async function updateAlertDB(id: number, alert: Partial<Alert>) {

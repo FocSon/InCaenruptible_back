@@ -1,5 +1,5 @@
 import sequelize from './db';
-import {DataTypes, EnumDataType, InferAttributes, InferCreationAttributes, Model} from 'sequelize';
+import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
 
 class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
@@ -10,12 +10,12 @@ class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
   declare publishingTime: Date;
   declare alertIds: number[];
 
-  
+
 }
 
 Post.init({
   id: {
-    type: DataTypes.INTEGER, 
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
@@ -33,7 +33,7 @@ Post.init({
     allowNull: false,
     unique: true,
   },
-  
+
   publishingTime: {
     type: DataTypes.DATE,
     allowNull: false,
@@ -42,13 +42,12 @@ Post.init({
     type: DataTypes.STRING,
     allowNull: true,
   },
-  
-  
+
+
 }, {
   sequelize,
   modelName: 'post',
 });
-
 
 
 export default Post;

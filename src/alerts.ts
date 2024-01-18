@@ -64,11 +64,11 @@ export async function endAlert(id: number, message?: string) {
   removeAlert(id);
 }
 
-async function deleteAlert(id: number) {
+export async function deleteAlert(id: number) {
   const alert = getAlert(id);
   if (!alert) return;
 
-  await deleteAlertDB(id)
+  await deleteAlertDB(id);
 
   removeAlert(id);
   notifyDeleteAlert(id);
@@ -107,7 +107,7 @@ export function getAlertRequestMap() {
   return alertRequests;
 }
 
-export function refuseAlert(id: number) {
+export function refuseRequest(id: number) {
   const request = getAlertRequest(id);
   if (!request) return;
 
@@ -115,7 +115,7 @@ export function refuseAlert(id: number) {
   notifyEmitterAlertRefused(id);
 }
 
-export async function acceptAlert(requestId: number) {
+export async function acceptRequest(requestId: number) {
   const request = getAlertRequest(requestId);
   if (!request) return;
 

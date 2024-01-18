@@ -1,5 +1,5 @@
 import httpStatus from 'http-status';
-import {Router, Request, Response} from 'express';
+import { Request, Response, Router } from 'express';
 
 const router: Router = Router();
 const resBody = httpStatus[httpStatus.NOT_FOUND];

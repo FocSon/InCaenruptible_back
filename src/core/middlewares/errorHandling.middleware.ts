@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 import httpStatus from 'http-status';
 import AppError from '@core/utils/appError';

@@ -1,4 +1,4 @@
-import {ValidationSchema} from '@core/interfaces/validationSchema';
+import { ValidationSchema } from '@core/interfaces/validationSchema';
 import Joi from 'joi';
 
 const requestAlertValidation: ValidationSchema = {
@@ -6,13 +6,13 @@ const requestAlertValidation: ValidationSchema = {
     title: Joi.string().required(),
     description: Joi.string().required(),
     type: Joi.string().required().valid('video', 'image', 'data'),
-    category: Joi.string().required()
+    category: Joi.string().required(),
   }),
 };
 
 const requestPostValidation: ValidationSchema = {
   params: Joi.object().keys({
-    id: Joi.string().required()
+    id: Joi.string().required(),
   }),
 };
 

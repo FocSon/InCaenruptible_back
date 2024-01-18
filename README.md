@@ -149,16 +149,16 @@
 >    **Inputs**   
         - id : number ; id of the alert to set as main.  
 
-**POST** --> `/api/refuseAlert` (auth)
+**POST** --> `/api/refuseRequest` (auth)
 >    **Inputs**   
-        - id : number ; id of the alert to refuse.
+        - id : number ; id of the request to refuse.
 
-**POST** --> `/api/acceptAlert` (auth)
+**POST** --> `/api/acceptRequest` (auth)
 >    **Inputs**   
-        - id : number ; id of the alert to accept.
-        - title : string | undefined ; title of the alert.
-        - description : string | undefined ; description of the alert.
-        - category : string | undefined ; category of the alert.
+        - id : number ; id of the request to accept.  
+        - title : string | undefined ; title of the request.  
+        - description : string | undefined ; description of the request.  
+        - category : string | undefined ; category of the request.  
 
 **POST** --> `/api/deleteAlert` (auth)
 >    **Inputs**   
@@ -166,23 +166,23 @@
 
 **POST** --> `/api/endAlert` (auth)
 >    **Inputs**   
-        - id : number ; id of the alert to end.
-        - message : string ; message to display to the user.
+        - id : number ; id of the alert to end.  
+        - message : string | undefined ; message to display to the user.  
 
 **POST** --> `/api/updateAlert` (auth)
 >    **Inputs**   
-        - id : number ; id of the alert to update.
-        - title : string | undefined ; title of the alert.
-        - description : string | undefined ; description of the alert.
-        - category : string | undefined ; category of the alert.
+        - id : number ; id of the alert to update.  
+        - title : string | undefined ; title of the alert.  
+        - description : string | undefined ; description of the alert.  
+        - category : string | undefined ; category of the alert.  
 
 **POST** --> `/api/createPost` (auth)
 >    **Inputs**   
-        - title : string ; title of the post.
-        - description : string ; description of the post.
-        - content : string ; content of the post.
-        - alertIds : number[] ; ids of the alerts linked to the post.
-        - medias : I don't know yet ; medias to upload that are used in the post.
+        - title : string ; title of the post.  
+        - description : string ; description of the post.  
+        - content : string ; content of the post.  
+        - alertIds : number[] ; ids of the alerts linked to the post.  
+        - medias : I don't know yet ; medias to upload that are used in the post.  
 
 **POST** --> `/api/deletePost` (auth)
 >    **Inputs**   
@@ -212,15 +212,15 @@
 
 `admin:watchRequest`   Client ---> Server
 >    **Content**  
-        - token : string ; token to auth the admin.
+        - token : string ; token to auth the admin.  
         - requestId : number ; id of the request to watch.
 
 `admin:stopWatchRequest`   Client ---> Server
 >    **Content**  
-        - token : string ; token to auth the admin.
+        - token : string ; token to auth the admin.  
         - requestId : number ; id of the request to stop watching.
 
 `admin:streamRequestData`   Server ---> Client
 >    **Content**  
-        - requestId : number ; id of the request to stream data from.
+        - requestId : number ; id of the request to stream data from.  
         - data : any ; data from the streamed request.
