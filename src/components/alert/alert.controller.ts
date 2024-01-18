@@ -28,59 +28,55 @@ const requestAlert = async (req: Request, res: Response) => {
   }
 };
 
-interface requestlistAlert {
+interface requestListAlert {
   n: string;
   startId: string;
 }
 
-const alertsDone = async (req: Request<{}, {}, {}, requestlistAlert>, res: Response) => {
+const alertsDone = async (req: Request<{}, {}, {}, requestListAlert>, res: Response) => {
   let n = parseInt(req.query.n, 10);
   if (isNaN(n)) {
-    n = 10; 
+    n = 10;
   }
-
   let startId = parseInt(req.query.startId, 10);
 
-  const listAlert  = await alertService.alertsDone(n, startId);
-
+  const listAlert = await alertService.alertsDone(n, startId);
   res.status(httpStatus.OK).json({ listAlert });
-
 };
 
 
 const post = async (req: Request, res: Response) => {
-
   const id = parseInt(req.params.id, 10);
-
   if (isNaN(id)) {
     res.locals.errorMessage = 'The id is undefined';
-      res.status(httpStatus.UNAUTHORIZED).json({ errorMessage: 'The id is undefined' }); 
+    res.status(httpStatus.UNAUTHORIZED).json({ errorMessage: 'The id is undefined' });
+    return;
   }
 
   const post = await alertService.post(id);
-  if (post !== undefined) {
-    res.status(httpStatus.OK).json({ post });
-  } else {
+  if (post === undefined) {
     res.locals.errorMessage = 'This is an unvalid id for a post';
     res.status(httpStatus.UNAUTHORIZED).json({ errorMessage: 'This is an unvalid id for a post' });
+    return;
   }
+
+  res.status(httpStatus.OK).json({ post });
 };
 
-const posts = async (req: Request<{}, {}, {}, requestlistAlert>, res: Response) => {
+const posts = async (req: Request<{}, {}, {}, requestListAlert>, res: Response) => {
   let n = parseInt(req.query.n, 10);
   if (isNaN(n)) {
-    n = 10; 
+    n = 10;
   }
-
   let startId = parseInt(req.query.startId, 10);
 
-  const listPosts  = await alertService.posts(n, startId);
-
+  const listPosts = await alertService.posts(n, startId);
   res.status(httpStatus.OK).json({ listPosts });
-
 };
 
-export { alertsDone };
-export { post };
-export { posts };
-export { requestAlert };
+export {
+  alertsDone,
+  post,
+  posts,
+  requestAlert,
+};

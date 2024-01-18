@@ -1,47 +1,43 @@
 import Alert from '@models/alert.model';
 import Post from '@models/post.model';
-import { Op, Sequelize } from "sequelize";
+import { Op } from 'sequelize';
 
 const alertsDone = async (n: number, startId: number | undefined) => {
-  
-  const listAlert = await Alert.findAll({ where: {
-    id: startId && {
-        [Op.lte]: startId  
-    }},
+  return await Alert.findAll({
+    where: {
+      id: startId && {
+        [Op.lt]: startId,
+      },
+    },
     order: [
-      ['id', 'DESC'] 
+      ['id', 'DESC'],
     ],
-    limit: n
+    limit: n,
   });
-
-  return listAlert;
 };
 
 const post = async (id: number) => {
-  
-  const post = await Post.findOne({ where: {
-    id: id,
-  }
+  return await Post.findOne({
+    where: {
+      id: id,
+    },
   });
-
-  return post;
 };
 
 
 const posts = async (n: number, startId: number | undefined) => {
-  
-  const listPosts = await Post.findAll({ where: {
-    id: startId && {
-        [Op.lte]: startId  
-    }},
+  return await Post.findAll({
+    where: {
+      id: startId && {
+        [Op.lte]: startId,
+      },
+    },
     order: [
-      ['id', 'DESC'] 
+      ['id', 'DESC'],
     ],
     attributes: { exclude: ['content'] },
-    limit: n
+    limit: n,
   });
-
-  return listPosts;
 };
 
 
