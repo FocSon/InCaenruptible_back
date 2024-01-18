@@ -1,4 +1,4 @@
-import {ValidationSchema} from '@core/interfaces/validationSchema';
+import { ValidationSchema } from '@core/interfaces/validationSchema';
 import Joi from 'joi';
 
 const loginValidation: ValidationSchema = {

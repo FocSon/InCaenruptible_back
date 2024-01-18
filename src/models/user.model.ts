@@ -1,5 +1,5 @@
 import sequelize from './db';
-import {DataTypes, InferAttributes, InferCreationAttributes, Model} from 'sequelize';
+import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: number;

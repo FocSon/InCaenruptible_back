@@ -1,10 +1,9 @@
-import { Server } from 'http';
+import http, { Server } from 'http';
 import app from '@app';
 import config from '@config/config';
 import logger from '@core/utils/logger';
 import errorHandler from '@core/utils/errorHandler';
 import sequelize from './models/db';
-import http from 'http';
 import io from '@io';
 import { hashSync } from 'bcrypt';
 
@@ -61,14 +60,14 @@ const server: Server = httpServer.listen(port, (): void => {
       });
     }
 
-    
+
     const alertPostCount = await AlertPost.count();
     if (alertPostCount === 0) {
       const alert1 = await Alert.findOne();
       const post1 = await Post.findOne();
       await AlertPost.create({
-          postId: post1.id,
-          alertId: alert1.id,
+        postId: post1.id,
+        alertId: alert1.id,
       });
     }
 

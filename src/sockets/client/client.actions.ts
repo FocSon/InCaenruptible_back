@@ -34,23 +34,23 @@ export const notifyDeleteAlert = (id: number) => {
   io.emit('deleteAlert', {
     id,
   } as any);
-}
+};
 
 export const notifyAlertDone = (id: number) => {
   io.emit('alertDone', {
     id,
   } as any);
-}
+};
 
 export const notifySetMainAlert = (id: number | null) => {
   io.emit('setMainAlert', {
     id,
   } as any);
-}
+};
 
 export const streamAlertData = (id: number, data: any) => {
   io.to(`alert-${id}`).emit('streamAlertData', {
     id,
     data,
   });
-}
+};

@@ -1,8 +1,8 @@
-import {agent as request} from 'supertest';
+import { agent as request } from 'supertest';
 import httpStatus from 'http-status';
 import app from '@app';
 import User from '@models/user.model';
-import {hashSync} from 'bcrypt';
+import { hashSync } from 'bcrypt';
 
 const userMock = {
   username: 'admin',
@@ -28,14 +28,14 @@ describe('User API', () => {
     test('Should return 400 Bad Request', async () => {
       await request(app)
         .post('/api/login')
-        .send({username: 'admin'})
+        .send({ username: 'admin' })
         .expect(httpStatus.BAD_REQUEST);
     });
 
     test('Should return 401 Unauthorized', async () => {
       await request(app)
         .post('/api/login')
-        .send({username: 'admin', password: 'wrongPassword'})
+        .send({ username: 'admin', password: 'wrongPassword' })
         .expect(httpStatus.UNAUTHORIZED);
     });
   });

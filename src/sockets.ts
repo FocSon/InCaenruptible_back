@@ -10,7 +10,7 @@ const io = new SocketIO.Server({
 });
 
 io.on('connection', (socket) => {
-  api.socketIoRegister(io, socket)
+  api.socketIoRegister(io, socket);
 });
 
 export default io;

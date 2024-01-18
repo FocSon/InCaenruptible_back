@@ -14,5 +14,5 @@ export default (socket: SocketIO.Socket) => ({
     const { id } = data;
 
     socket.leave(`alert-${id}`);
-  }
+  },
 })

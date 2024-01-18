@@ -1,4 +1,4 @@
-import {Sequelize} from 'sequelize';
+import { Sequelize } from 'sequelize';
 
 const setupDatabase = (path: string): Sequelize => {
   const sequelize = new Sequelize({

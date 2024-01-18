@@ -1,12 +1,20 @@
 import { Router } from 'express';
-import validation from '@core/middlewares/validate.middleware';
-import {setMainAlert, refuseAlert, acceptAlert, deleteAlert, endAlert, updateAlert, createPost, deletePost} from './admin.controller';
+import {
+  acceptRequest,
+  createPost,
+  deleteAlert,
+  deletePost,
+  endAlert,
+  refuseRequest,
+  setMainAlert,
+  updateAlert,
+} from './admin.controller';
 
 const router: Router = Router();
 
 router.post('/setMainAlert', [], setMainAlert);
-router.post('/refuseAlert', [], refuseAlert);
-router.post('/acceptAlert', [], acceptAlert);
+router.post('/refuseRequest', [], refuseRequest);
+router.post('/acceptRequest', [], acceptRequest);
 router.post('/deleteAlert', [], deleteAlert);
 router.post('/endAlert', [], endAlert);
 router.post('/updateAlert', [], updateAlert);

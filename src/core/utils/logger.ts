@@ -14,7 +14,7 @@ const errorStackFormat = winston.format((info) => {
   }
   return info;
 });
-const errorTemplate = ({timestamp, level, message, stack}) => {
+const errorTemplate = ({ timestamp, level, message, stack }) => {
   const reqId = httpContext.get('ReqId');
   let tmpl = `${timestamp}`;
   if (reqId) tmpl += ` ${reqId}`;
@@ -26,7 +26,7 @@ const logger: winston.Logger = winston.createLogger({
   level: config.env === 'development' ? 'debug' : 'info',
   format: winston.format.combine(
     errorStackFormat(),
-    winston.format.timestamp({format: 'YYYY-MM-DD HH:mm:ss.SSS'}),
+    winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
     config.env === 'development'
       ? winston.format.colorize()
       : winston.format.uncolorize(),

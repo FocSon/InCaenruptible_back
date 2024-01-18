@@ -1,8 +1,8 @@
 import SocketIO from 'socket.io';
 import jwt from 'jsonwebtoken';
 import * as Alerts from '@alerts';
+import { acceptRequest } from '@alerts';
 import { streamAlertData } from '@sockets/client/client.actions';
-import { acceptAlert } from '@alerts';
 import { streamRequestData } from '@sockets/admin/admin.actions';
 import config from '@config/config';
 
@@ -22,7 +22,7 @@ export default (socket: SocketIO.Socket) => ({
       streamRequestData(request.requestId, data);
 
       if (config.env === 'development' && request.title === 'valid') {
-        await acceptAlert(request.requestId);
+        await acceptRequest(request.requestId);
       }
     } else {
       const alert = Alerts.getAlert(id);

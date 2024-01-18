@@ -1,6 +1,6 @@
 import httpMocks from 'node-mocks-http';
 import httpStatus from 'http-status';
-import {Response} from 'express';
+import { Response } from 'express';
 
 import errorHandler from '@core/utils/errorHandler';
 import errorHandling from './errorHandling.middleware';

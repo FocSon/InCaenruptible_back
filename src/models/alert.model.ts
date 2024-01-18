@@ -1,5 +1,5 @@
 import sequelize from './db';
-import {DataTypes, EnumDataType, InferAttributes, InferCreationAttributes, Model} from 'sequelize';
+import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 
 class Alert extends Model<InferAttributes<Alert>, InferCreationAttributes<Alert>> {
   declare id: number;
@@ -14,7 +14,7 @@ class Alert extends Model<InferAttributes<Alert>, InferCreationAttributes<Alert>
 
 Alert.init({
   id: {
-    type: DataTypes.INTEGER, 
+    type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
@@ -28,7 +28,7 @@ Alert.init({
     allowNull: false,
   },
   type: {
-    type: DataTypes.ENUM('video','photo','data'),
+    type: DataTypes.ENUM('video', 'photo', 'data'),
     allowNull: false,
     unique: true,
   },
@@ -48,7 +48,6 @@ Alert.init({
   sequelize,
   modelName: 'alert',
 });
-
 
 
 export default Alert;
