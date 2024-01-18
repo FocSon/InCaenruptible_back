@@ -190,27 +190,37 @@
 
 #### WebSocket
 
-`admin:init`   Server ---> Client (auth)
+`admin:startAdminSession`   Client ---> Server
+>    **Content**  
+        - token : string ; token to auth the admin.
+
+`admin:init`   Server ---> Client
 >    **Content**  
         - requests : Request[] ; list of requests not yet accepted or refused.
 
-`admin:newRequest`   Server ---> Client (auth)
+`admin:endAdminSession`   Client ---> Server
+>    **Content**  
+        - token : string ; token to auth the admin.
+
+`admin:newRequest`   Server ---> Client
 >    **Content**  
         - request : Request ; new request not yet accepted or refused.
 
-`admin:requestDeleted`   Server ---> Client (auth)
->    **Content**  
+`admin:requestDeleted`   Server ---> Client
+>    **Content**
         - requestId : number ; id of the request deleted.
 
-`admin:watchRequest`   Client ---> Server (auth)
+`admin:watchRequest`   Client ---> Server
 >    **Content**  
+        - token : string ; token to auth the admin.
         - requestId : number ; id of the request to watch.
 
-`admin:stopWatchRequest`   Client ---> Server (auth)
+`admin:stopWatchRequest`   Client ---> Server
 >    **Content**  
+        - token : string ; token to auth the admin.
         - requestId : number ; id of the request to stop watching.
 
-`admin:streamRequestData`   Server ---> Client (auth)
+`admin:streamRequestData`   Server ---> Client
 >    **Content**  
         - requestId : number ; id of the request to stream data from.
         - data : any ; data from the streamed request.
