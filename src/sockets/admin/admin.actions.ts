@@ -21,13 +21,13 @@ export const adminInit = (socket: SocketIO.Socket) => {
 };
 
 export const notifyNewRequest = (request: AlertRequest) => {
-  io.emit('admin:newRequest', {
+  io.to('admin').emit('admin:newRequest', {
     request: parseRequest(request),
   } as any);
 };
 
 export const notifyDeleteRequest = (requestId: number) => {
-  io.emit('admin:requestDeleted', {
+  io.to('admin').emit('admin:requestDeleted', {
     requestId,
   } as any);
 };

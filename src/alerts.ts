@@ -7,6 +7,8 @@ import {
 } from '@sockets/emitter/emitter.actions';
 import config from '@config/config';
 import jwt from 'jsonwebtoken';
+import { notifyDeleteRequest, notifyNewRequest } from '@sockets/admin/admin.actions';
+import { createAlertDB, deleteAlertDB, updateAlertDB } from './alerts.service';
 
 function genToken(id: number, isARequest: boolean) {
   return jwt.sign({
@@ -17,11 +19,10 @@ function genToken(id: number, isARequest: boolean) {
 
 //region Alerts
 const activeAlerts = new Map<number, Alert>();
-let alertID = 0;
 
-export function createAlert(alert: Omit<Alert, 'id'>) {
-  // TODO : Update database
-  const nAlter = { ...alert, id: alertID++ };
+export async function createAlert(alert: Omit<Alert, 'id'>) {
+  const alertDb = await createAlertDB(alert);
+  const nAlter = { ...alert, id: alertDb.id };
   activeAlerts.set(nAlter.id, nAlter);
 
   notifyNewAlert(nAlter);
@@ -48,12 +49,14 @@ export function removeAlert(id: number) {
   activeAlerts.delete(id);
 }
 
-export function endAlert(id: number, message?: string) {
+export async function endAlert(id: number, message?: string) {
   const alert = getAlert(id);
   if (!alert) return;
 
   alert.endTime = Date.now();
-  // TODO : Update database
+  await updateAlertDB(id, {
+    endTime: alert.endTime,
+  });
 
   notifyAlertDone(id);
   notifyEmitterAlertDone(id, message ?? 'Alert has been ended');
@@ -61,10 +64,11 @@ export function endAlert(id: number, message?: string) {
   removeAlert(id);
 }
 
-function deleteAlert(id: number) {
-  // TODO : Update database
+async function deleteAlert(id: number) {
   const alert = getAlert(id);
   if (!alert) return;
+
+  await deleteAlertDB(id)
 
   removeAlert(id);
   notifyDeleteAlert(id);
@@ -77,7 +81,9 @@ let requestID = 0;
 
 export function createAlertRequest(request: Omit<AlertRequest, 'requestId'>) {
   const id = requestID++;
-  alertRequests.set(id, { ...request, requestId: id });
+  const newRequest = { ...request, requestId: id };
+  alertRequests.set(id, newRequest);
+  notifyNewRequest(newRequest);
   return {
     id,
     token: genToken(id, true),
@@ -90,7 +96,7 @@ export function getAlertRequest(id: number) {
 
 export function removeAlertRequest(id: number) {
   alertRequests.delete(id);
-  // TODO : notify admin that alert request has been removed
+  notifyDeleteRequest(id);
 }
 
 export function getAlertRequests() {
@@ -109,13 +115,13 @@ export function refuseAlert(id: number) {
   notifyEmitterAlertRefused(id);
 }
 
-export function acceptAlert(requestId: number) {
+export async function acceptAlert(requestId: number) {
   const request = getAlertRequest(requestId);
   if (!request) return;
 
   removeAlertRequest(requestId);
 
-  const { id, token } = createAlert({
+  const { id, token } = await createAlert({
     title: request.title,
     description: request.description,
     type: request.type,

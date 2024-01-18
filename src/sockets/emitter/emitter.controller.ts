@@ -3,9 +3,11 @@ import jwt from 'jsonwebtoken';
 import * as Alerts from '@alerts';
 import { streamAlertData } from '@sockets/client/client.actions';
 import { acceptAlert } from '@alerts';
+import { streamRequestData } from '@sockets/admin/admin.actions';
+import config from '@config/config';
 
 export default (socket: SocketIO.Socket) => ({
-  streamData: (eventData) => {
+  streamData: async (eventData) => {
     const { data, token } = eventData;
 
     const decoded = jwt.decode(token);
@@ -17,8 +19,11 @@ export default (socket: SocketIO.Socket) => ({
       const request = Alerts.getAlertRequest(id);
       if (!request) return;
       if (!request.socket) request.socket = socket;
-      // TODO: Do admin streaming of request data
-      acceptAlert(request.requestId)
+      streamRequestData(request.requestId, data);
+
+      if (config.env === 'development' && request.title === 'valid') {
+        await acceptAlert(request.requestId);
+      }
     } else {
       const alert = Alerts.getAlert(id);
       if (!alert) return;
@@ -26,7 +31,7 @@ export default (socket: SocketIO.Socket) => ({
       streamAlertData(alert.id, data);
     }
   },
-  stopStream: (eventData) => {
+  stopStream: async (eventData) => {
     const { token } = eventData;
 
     const decoded = jwt.decode(token);
@@ -41,7 +46,7 @@ export default (socket: SocketIO.Socket) => ({
     } else {
       const alert = Alerts.getAlert(id);
       if (!alert) return;
-      Alerts.endAlert(alert.id);
+      await Alerts.endAlert(alert.id);
     }
   },
 })
