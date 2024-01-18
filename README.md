@@ -149,16 +149,16 @@
 >    **Inputs**   
         - id : number ; id of the alert to set as main.  
 
-**POST** --> `/api/refuseAlert` (auth)
+**POST** --> `/api/refuseRequest` (auth)
 >    **Inputs**   
-        - id : number ; id of the alert to refuse.
+        - id : number ; id of the request to refuse.
 
-**POST** --> `/api/acceptAlert` (auth)
+**POST** --> `/api/acceptRequest` (auth)
 >    **Inputs**   
-        - id : number ; id of the alert to accept.  
-        - title : string | undefined ; title of the alert.  
-        - description : string | undefined ; description of the alert.  
-        - category : string | undefined ; category of the alert.  
+        - id : number ; id of the request to accept.  
+        - title : string | undefined ; title of the request.  
+        - description : string | undefined ; description of the request.  
+        - category : string | undefined ; category of the request.  
 
 **POST** --> `/api/deleteAlert` (auth)
 >    **Inputs**   

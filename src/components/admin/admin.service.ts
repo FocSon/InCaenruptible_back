@@ -1,92 +1,58 @@
-import Alert from '@models/alert.model';
+import AlertModel from '@models/alert.model';
 import Post from '@models/post.model';
 import { Op } from 'sequelize';
 import * as Alerts from '@alerts' 
+import { Alert } from 'types';
 
-const acceptAlert = async (n: number, startId: number | undefined) => {
-  return await Post.findAll({
-    where: {
-      id: startId && {
-        [Op.lte]: startId,
+
+
+const updateAlert = async (id: number, alert: Partial<Alert>) => {
+  const alertf = await AlertModel.findOne({
+    where: { id: id },
+  });
+  if (alertf === null){
+    return false;
+  }
+  return await AlertModel.update(alert as any, {
+      where: {
+        id,
       },
-    },
-    order: [
-      ['id', 'DESC'],
-    ],
-    attributes: { exclude: ['content'] },
-    limit: n,
+   } as any);
+}
+
+
+const createPost = async (id:number, title: string | undefined, description: string | undefined, content: string | undefined) => {
+  return await Post.create({
+    id: id,
+    title: title,
+    description: description,
+    content: content,
+    publishingTime: new Date(),
+    alertIds: undefined,
   });
 };
 
 
-const endAlert = async (n: number, startId: number | undefined) => {
-  return await Post.findAll({
-    where: {
-      id: startId && {
-        [Op.lte]: startId,
-      },
-    },
-    order: [
-      ['id', 'DESC'],
-    ],
-    attributes: { exclude: ['content'] },
-    limit: n,
-  });
-};
+const deletePost = async (id: number) => {
+
+    const post = await Post.findOne({
+        where: { id: id },
+      });
+
+      if (post === null){
+        return false;
+      }
 
 
-const updateAlert = async (n: number, startId: number | undefined) => {
-  return await Post.findAll({
-    where: {
-      id: startId && {
-        [Op.lte]: startId,
-      },
-    },
-    order: [
-      ['id', 'DESC'],
-    ],
-    attributes: { exclude: ['content'] },
-    limit: n,
-  });
-};
-
-
-const createPost = async (n: number, startId: number | undefined) => {
-  return await Post.findAll({
-    where: {
-      id: startId && {
-        [Op.lte]: startId,
-      },
-    },
-    order: [
-      ['id', 'DESC'],
-    ],
-    attributes: { exclude: ['content'] },
-    limit: n,
-  });
-};
-
-
-const deletePost = async (n: number, startId: number | undefined) => {
-  return await Post.findAll({
-    where: {
-      id: startId && {
-        [Op.lte]: startId,
-      },
-    },
-    order: [
-      ['id', 'DESC'],
-    ],
-    attributes: { exclude: ['content'] },
-    limit: n,
-  });
+    await Post.destroy({
+        where: {
+          id: id,
+        },
+    });
 };
   
   
 export default {
-  refuseAlert,
-  acceptAlert,
-  endAlert,
   updateAlert,
   createPost,
   deletePost,
