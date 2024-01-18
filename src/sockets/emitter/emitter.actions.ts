@@ -25,7 +25,7 @@ export function notifyEmitterAlertAccepted(requestId: number, alertId: number, t
 }
 
 export function notifyEmitterAlertDone(id: number, message: string) {
-  const request = getAlertRequest(id);
+  const request = getAlert(id);
   if (!request) return;
 
   if (request.socket) {

@@ -7,6 +7,7 @@ export default (io: SocketIO.Server, socket: SocketIO.Socket) => {
 
   socket.on('watchAlert', controller.watchAlert);
   socket.on('stopWatchAlert', controller.stopWatchAlert);
+  socket.on('askInit', controller.askInit);
 
   init(socket);
 }

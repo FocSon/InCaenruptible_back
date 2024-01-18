@@ -1,5 +1,5 @@
 import { Alert, AlertRequest } from './types';
-import { notifyAlertDone, notifyDeleteAlert, notifyNewAlert } from '@sockets/client/client.actions';
+import { notifyAlertDone, notifyDeleteAlert, notifyNewAlert, notifySetMainAlert } from '@sockets/client/client.actions';
 import {
   notifyEmitterAlertAccepted,
   notifyEmitterAlertDone,
@@ -47,6 +47,10 @@ export function getAlertMap() {
 
 export function removeAlert(id: number) {
   activeAlerts.delete(id);
+
+  if (id === mainAlert) {
+    setMainAlertId(null);
+  }
 }
 
 export async function endAlert(id: number, message?: string) {
@@ -70,8 +74,9 @@ export async function deleteAlert(id: number) {
 
   await deleteAlertDB(id);
 
-  removeAlert(id);
   notifyDeleteAlert(id);
+  notifyEmitterAlertDone(id, 'Alert has been deleted');
+  removeAlert(id);
 }
 
 //endregion
@@ -111,8 +116,8 @@ export function refuseRequest(id: number) {
   const request = getAlertRequest(id);
   if (!request) return;
 
-  removeAlertRequest(id);
   notifyEmitterAlertRefused(id);
+  removeAlertRequest(id);
 }
 
 export async function acceptRequest(requestId: number) {
@@ -140,6 +145,7 @@ let mainAlert: number | null = null;
 
 export function setMainAlertId(id: number | null) {
   mainAlert = id;
+  notifySetMainAlert(mainAlert);
 }
 
 export function getMainAlertId() {

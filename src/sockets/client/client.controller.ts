@@ -1,4 +1,5 @@
 import SocketIO from 'socket.io';
+import { init } from '@sockets/client/client.actions';
 
 export default (socket: SocketIO.Socket) => ({
   watchAlert: (data) => {
@@ -15,4 +16,7 @@ export default (socket: SocketIO.Socket) => ({
 
     socket.leave(`alert-${id}`);
   },
+  askInit: (data) => {
+    init(socket)
+  }
 })

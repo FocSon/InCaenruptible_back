@@ -56,6 +56,8 @@
 
 #### WebSocket
 
+`askInit`   Client ---> Server  
+
 `init`   Server ---> Client  
 >    **Content**  
         - alerts : Alert[] ; list of alerts currently active.   
