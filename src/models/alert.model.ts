@@ -21,7 +21,6 @@ Alert.init({
   title: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true,
   },
   description: {
     type: DataTypes.TEXT,
@@ -30,7 +29,6 @@ Alert.init({
   type: {
     type: DataTypes.ENUM('video','photo','data'),
     allowNull: false,
-    unique: true,
   },
   category: {
     type: DataTypes.STRING,
