@@ -14,9 +14,8 @@ const updateAlert = async (id: number, alert: Partial<Alert>) => {
 };
 
 
-const createPost = async (id: number, title: string | undefined, description: string | undefined, content: string | undefined) => {
+const createPost = async ( title: string | undefined, description: string | undefined, content: string | undefined) => {
   return await Post.create({
-    id: id,
     title: title,
     description: description,
     content: content,

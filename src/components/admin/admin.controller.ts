@@ -87,8 +87,8 @@ const updateAlert = async (req: Request, res: Response) => {
 };
 
 const createPost = async (req: Request, res: Response) => {
-  const { id, title, description, content } = req.body;
-  const post = await adminService.createPost(id, title, description, content);
+  const { title, description, content } = req.body;
+  const post = await adminService.createPost(title, description, content);
 
   if (post === undefined) {
     res.locals.errorMessage = 'Error while creating the new post';

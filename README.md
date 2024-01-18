@@ -167,7 +167,7 @@
 **POST** --> `/api/endAlert` (auth)
 >    **Inputs**   
         - id : number ; id of the alert to end.  
-        - message : string ; message to display to the user.  
+        - message : string | undefined ; message to display to the user.  
 
 **POST** --> `/api/updateAlert` (auth)
 >    **Inputs**   
