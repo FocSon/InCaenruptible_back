@@ -64,7 +64,7 @@ export async function endAlert(id: number, message?: string) {
   removeAlert(id);
 }
 
-async function deleteAlert(id: number) {
+export async function deleteAlert(id: number) {
   const alert = getAlert(id);
   if (!alert) return;
 
