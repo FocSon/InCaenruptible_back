@@ -1,3 +1,27 @@
+## Installation
+
+- Création d'un fichier `.env.local` à la racine du projet
+```
+NODE_ENV=development
+PORT=<port>
+JWT_SECRET=<secret>
+```
+
+- Installation des dépendances
+``` shell
+pnpm install
+```
+
+- Lancer le serveur
+``` shell
+pnpm server:dev
+```
+
+### Warning
+
+Pour utiliser toutes les fonctionnalités de ce serveur, il est nécéssaire de disposer d'un serveur sécurisé par SSL et accéder au site web en utilisant le protocole HTTPS.
+Les flux vidéos étant bloqués par le navigateur dans le cas contraire, la partie streaming ne sera pas effective sinon.
+
 ## Type 
 
 - Object Alert:
