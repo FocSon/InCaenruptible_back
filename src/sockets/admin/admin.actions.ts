@@ -32,9 +32,9 @@ export const notifyDeleteRequest = (requestId: number) => {
   } as any);
 };
 
-export const streamRequestData = (id: number, data: any) => {
-  io.to(`request-${id}`).emit('streamRequestData', {
-    id,
+export const streamRequestData = (requestId: number, data: any) => {
+  io.to(`request-${requestId}`).emit('admin:streamRequestData', {
+    requestId,
     data,
   });
 };

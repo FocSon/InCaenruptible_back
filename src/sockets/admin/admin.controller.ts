@@ -3,18 +3,18 @@ import { adminInit } from '@sockets/admin/admin.actions';
 
 export default (socket: SocketIO.Socket) => ({
   watchRequest: (data) => {
-    const { id } = data;
+    const { requestId } = data;
 
-    socket.join(`request-${id}`);
+    socket.join(`request-${requestId}`);
 
     socket.on('disconnect', () => {
-      socket.leave(`request-${id}`);
+      socket.leave(`request-${requestId}`);
     });
   },
   stopWatchRequest: (data) => {
-    const { id } = data;
+    const { requestId } = data;
 
-    socket.leave(`request-${id}`);
+    socket.leave(`request-${requestId}`);
   },
   startAdminSession: (data) => {
     adminInit(socket);

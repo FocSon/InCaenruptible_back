@@ -82,7 +82,7 @@ export async function deleteAlert(id: number) {
 //endregion
 //region Alert Requests
 const alertRequests = new Map<number, AlertRequest>();
-let requestID = 0;
+let requestID = 1;
 
 export function createAlertRequest(request: Omit<AlertRequest, 'requestId'>) {
   const id = requestID++;
